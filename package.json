@@ -1,0 +1,24 @@
+{
+  "name": "excel-course",
+  "version": "1.0.0",
+  "description": "Pure JavaScript Exel Application",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmv161/excel-cource.git"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "exel"
+  ],
+  "author": "cmv161 <ib-zi@mail.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmv161/excel-cource/issues"
+  },
+  "homepage": "https://github.com/cmv161/excel-cource#readme"
+}
