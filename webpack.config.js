@@ -50,6 +50,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: 'index.html',
+      // minify: false,
       minify: {
         removeComments: isProd,
         collapseWhitespace: isProd,
