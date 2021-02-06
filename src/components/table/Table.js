@@ -26,11 +26,16 @@ export class Table extends ExcelComponent {
 
   }
 
+  selectCell($cell) {
+    this.selection.select($cell)
+    this.$emit('table:select', $cell)
+  }
+
   onMousedown(event) {
     if (shouldResize(event)) {
       resizeHandler(this.$root, event)
     }
   }
 }
-
+  
 
