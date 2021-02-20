@@ -14,15 +14,19 @@ class Dom {
   }
 
   text(text) {
-    if (typeof text === 'string') {
+    // if (text) {
+    if (typeof text !== 'undefined') {
       this.$el.textContent = text
       return this
     }
-    if (this.$el.tagName.toLowerCase()==='input'){
+    if (this.$el.tagName.toLowerCase()==='input') {
       return this.$el.value.trim()
     }
     return this.$el.textContent.trim()
   }
+
+
+
   
 
   clear() {
@@ -63,6 +67,15 @@ class Dom {
     return this
   }
   
+  attr(name, value) {
+    // debugger
+    if (value) {
+      this.$el.setAttribute(name, value)
+      return this
+    }
+    return this.$el.getAttribute(name)
+  }
+  
   
   get data() {
     return this.$el.dataset
@@ -96,6 +109,12 @@ class Dom {
 
   getCoords() {
     return this.$el.getBoundingClientRect()
+  }
+  getStyles(styles=[]) {
+    return styles.reduce((res, s)=>{
+      res[s]= this.$el.style[s]
+      return res
+    }, {})
   }
 }
 export function $(selector) {

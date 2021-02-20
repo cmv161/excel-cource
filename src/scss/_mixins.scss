@@ -11,7 +11,8 @@
     font-size: 18px;
   }
   &:active,&.active {
-    color: $color
+    //color: $color
+    color: red
   }
   &:hover {
     background: #eee;
