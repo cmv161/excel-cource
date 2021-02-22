@@ -1,4 +1,4 @@
-import {storage} from '../core/utils';
+import {clone, storage} from '../core/utils';
 import {defaultStyles, defaultTitle} from '../constans';
 import {debug} from 'webpack';
 
@@ -9,7 +9,9 @@ const defaultState = {
   stylesState: {},
   currentText: '',
   title: defaultTitle,
-  currentStyles: defaultStyles
+  currentStyles: defaultStyles,
+  openedDate: new Date().toJSON()
+  
 }
 
 const normalize = state=>({
@@ -20,17 +22,16 @@ const normalize = state=>({
 })
 
 
-
-export const initialState = storage('exel-state')
-
-    ?normalize(storage('exel-state'))
-    : defaultState
+// export const initialState = storage('exel-state')
+//
+//     ?normalize(storage('exel-state'))
+//     : defaultState
 
 export const initialState2 = storage('exel-state')
 
     ?storage('exel-state')
     : defaultState
 
-
-console.log('initialState', initialState)
-console.log('initialState2', initialState2)
+export function normalizeInitialState(state) {
+  return state ? normalize(state): clone(defaultState)
+}
