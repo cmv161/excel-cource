@@ -12,6 +12,11 @@ class Dom {
     }
     return this.$el.outerHTML.trim()
   }
+  
+  clear() {
+    this.html('')
+    return this
+  }
 
   text(text) {
     // if (text) {
@@ -24,9 +29,6 @@ class Dom {
     }
     return this.$el.textContent.trim()
   }
-
-
-
   
 
   clear() {
