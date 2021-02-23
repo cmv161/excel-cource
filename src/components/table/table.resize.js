@@ -1,6 +1,6 @@
 import {$} from '@core/dom';
 import {storage} from '../../core/utils';
-import {Store} from '../../core/createStore';
+import {Store} from '@core/store/createStore';
 import {rootReducer} from '../../redux/rootReducer';
 export function resizeHandler($root, event) {
   return new Promise(resolve=>{
