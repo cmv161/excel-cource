@@ -3,7 +3,7 @@ import {$} from '@core/dom';
 import {Page} from '../core/Page';
 import {initialState, normalizeInitialState} from '../redux/initialState';
 import {rootReducer} from '../redux/rootReducer';
-import {createStore, Store} from '../core/createStore';
+import {createStore, Store} from '@core/store/createStore';
 import {debounce, storage} from '../core/utils';
 import {Excel} from '../components/excel/Excel';
 import {Header} from '../components/header/Header';
