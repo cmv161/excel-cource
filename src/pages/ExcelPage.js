@@ -1,6 +1,6 @@
 
 import {$} from '@core/dom';
-import {Page} from '../core/Page';
+import {Page} from '@core/page/Page';
 import {initialState, normalizeInitialState} from '../redux/initialState';
 import {rootReducer} from '../redux/rootReducer';
 import {createStore, Store} from '@core/store/createStore';
@@ -11,30 +11,36 @@ import {Toolbar} from '../components/toolbar/Toolbar';
 import {Formula} from '../components/formula/Formula';
 import {Table} from '../components/table/Table';
 import {changeDate, changeTitle} from '../redux/actions';
+import {StateProcessor} from "@core/page/StateProcessor";
+import {LocalStorageClient} from "@/components/shared/LocalStorageClient";
 
-function storageName(param) {
-  return 'excel:'+ param
-}
+
+
+
+
+
 export class ExcelPage extends Page {
-  getRoot() {
-    console.log('getroot')
-    const params = this.params ? this.params: Date.now().toString()
+  constructor(param) {
+    super(param)
 
+    this.storeSub=null
+    this.processor = new StateProcessor(
+        new LocalStorageClient(this.params)
+    )
+  }
+  async getRoot() {
+    // const params = this.params ? this.params: Date.now().toString()
+    // const state = storage(storageName(params))
+    const state= await this.processor.get()
 
-    console.log(this.params)
-
-    const state = storage(storageName(params))
-    console.log('state', state)
     const store= createStore(rootReducer, normalizeInitialState(state))
-    console.log('store', store)
-    const stateListener=debounce(state=>{
-      console.log('App State:', state )
-      
-     
-      storage(storageName(params), state )
-    }, 300)
 
-    store.subscribe(stateListener)
+    //
+    // const stateListener=debounce(state=>{
+    //   storage(storageName(params), state )
+    // }, 300)
+
+    this.storeSub=store.subscribe(this.processor.listen)
 
     this.excel =new Excel( {
       components: [Header, Toolbar, Formula, Table],
@@ -49,5 +55,6 @@ export class ExcelPage extends Page {
 
   destroy() {
     this.excel.destroy()
+    this.storeSub.unsubscribe()
   }
 }
